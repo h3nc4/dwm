@@ -1635,6 +1635,7 @@ shifttag(const Arg *arg) {
 			^ (c->tags << (LENGTH(tags) + arg->i));
 
 	toggletag(&shifted);
+	toggleview(&shifted);
 }
 
 void
