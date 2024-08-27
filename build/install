@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+VERSION=6.5
+PREFIX=/usr/local
+MANPREFIX=${PREFIX}/share/man
+sudo install -Dm755 dwm ${PREFIX}/bin/dwm &&
+sudo install -Dm644 dwm.1 ${MANPREFIX}/man1/dwm.1 &&
+sudo sed -i "s/VERSION/${VERSION}/g" ${MANPREFIX}/man1/dwm.1 &&
+echo "dwm installed."
+cd .. && rm -rf dwm

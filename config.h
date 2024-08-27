@@ -74,7 +74,7 @@ static const Key keys[] = {
 	{ MODKEY,             XK_q,       spawn,          {.v = termcmd } },  // Launch terminal
 	{ MODKEY,             XK_c,	      spawn,          SHCMD("code") }, // Super + c Launch code
 	{ MODKEY|ShiftMask,   XK_c,	      spawn,          SHCMD("chromium") }, // Super + Shift + c Launch chromium
-	{ MODKEY,             XK_w,       spawn,          SHCMD("firefox") }, // Super + w Launch firefox
+	{ MODKEY,             XK_w,       spawn,          SHCMD("firefox -P me") }, // Super + w Launch firefox
 	{ MODKEY,             XK_x,       spawn,          SHCMD("keepassxc") }, // Super + x Launch keepassxc
 	{ MODKEY,             XK_v,       spawn,          SHCMD("virt-manager") }, // Super + v Launch virt-manager
 	{ MODKEY,             XK_f,       spawn,          SHCMD("thunar") }, // Super + f Launch thunar
