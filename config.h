@@ -77,30 +77,38 @@ static const Key keys[] = {
 	{ MODKEY,             XK_w,       spawn,          SHCMD("firefox -P me") }, // Super + w Launch firefox
 	{ MODKEY,             XK_x,       spawn,          SHCMD("keepassxc") }, // Super + x Launch keepassxc
 	{ MODKEY,             XK_v,       spawn,          SHCMD("virt-manager") }, // Super + v Launch virt-manager
-	{ MODKEY,             XK_f,       spawn,          SHCMD("thunar") }, // Super + f Launch thunar
+	{ MODKEY,             XK_d,       spawn,          SHCMD("arandr") }, // Super + f Launch display settings
 	{ MODKEY,             XK_e,       spawn,          SHCMD("st -e lf") }, // Super + e Launch lf
 	{ MODKEY|ShiftMask,   XK_Escape,  spawn,          SHCMD("st -e htop") }, // Super + Shift + esc Launch htop
 	{ MODKEY,             XK_r,       spawn,          SHCMD("st -e newsboat") }, // Super + r Launch newsboat
 	{ MODKEY|ShiftMask,   XK_v,       spawn,          SHCMD("st -e nvim") }, // Super + Shift + v Launch nvim
 	{ MODKEY,             XK_n,       spawn,          SHCMD("st -e nmtui") }, // Super + n Launch nmtui
 	{ MODKEY,             XK_p,       spawn,          SHCMD("st -e pulsemixer") }, // Super + p Launch pulsemixer
-	{ MODKEY,             XK_s,       spawn,          SHCMD("sudo systemctl suspend") }, // Super + s Suspend
-	{ MODKEY|ShiftMask,   XK_s,       spawn,          SHCMD("sudo poweroff") }, // Super + Shift + s Shutdown
-	{ MODKEY|ShiftMask,   XK_r,       spawn,          SHCMD("sudo reboot") }, // Super + Shift + r Reboot
+	{ MODKEY,             XK_s,       spawn,          SHCMD("doas systemctl suspend") }, // Super + s Suspend
+	{ MODKEY|ShiftMask,   XK_s,       spawn,          SHCMD("doas poweroff") }, // Super + Shift + s Shutdown
+	{ MODKEY|ShiftMask,   XK_r,       spawn,          SHCMD("doas reboot") }, // Super + Shift + r Reboot
 	{ MODKEY,             XK_y,       spawn,          SHCMD("yt stream") }, // Super + y Stream youtube video to mpv
 	{ MODKEY|ShiftMask,   XK_y,       spawn,          SHCMD("yt mp4") }, // Super + Shift + y Download youtube video
 	{ MODKEY|ControlMask, XK_y,       spawn,          SHCMD("yt mp3") }, // Super + Ctrl + y Download youtube video as mp3
 	{ 0,                  XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // PrtSc Print Selection and copy
-	{ ShiftMask,          XK_Print,   spawn,          SHCMD("maim \"$HOME/.cache/$(date +%s).png\"") }, // Shift + PrtSc Print Selection and save
-	{ MODKEY,             XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // Super + Print Screen and copy
-	{ MODKEY|ShiftMask,   XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift + Print Screen and save
+	{ ShiftMask,          XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift + PrtSc Print Selection and save
+	{ MODKEY,             XK_Print,   spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }, // Super + Print Screen and copy
+	{ MODKEY|ShiftMask,   XK_Print,   spawn,          SHCMD("maim \"$HOME/.cache/$(date +%s).png\"") }, // Super + Shift + Print Screen and save
+	{ MODKEY,             XK_F1,      spawn,          SHCMD("pulsemixer --mute") }, // Super + F1 Mute volume
+	{ MODKEY|ShiftMask,   XK_F1,      spawn,          SHCMD("pulsemixer --unmute") }, // Super + Shift + F1 Unmute volume
+	{ MODKEY,             XK_F2,      spawn,          SHCMD("pulsemixer --unmute --change-volume -5") }, // Super + F2 Decrease volume
+	{ MODKEY,             XK_F3,      spawn,          SHCMD("pulsemixer --unmute --change-volume +5") }, // Super + F3 Increase volume
+	{ MODKEY,             XK_F4,      spawn,          SHCMD("pulsemixer --unmute --set-volume 100") }, // Super + F4 Set volume to default
+	{ MODKEY,             XK_F5,      spawn,          SHCMD("doas systemctl restart NetworkManager") }, // Super + F5 Restart Wifi
+	{ MODKEY,             XK_F11,     spawn,          SHCMD("doas brightnessctl set 10%%-") }, // Super + F11 Decrease brightness
+	{ MODKEY,             XK_F12,     spawn,          SHCMD("doas brightnessctl set +10%%") }, // Super + F12 Increase brightness
 	{ MODKEY,             XK_b,       togglebar,      {0} }, // Toggle the status bar
 	{ MODKEY,             XK_j,       focusstack,     {.i = +1 } }, // Move focus to the next window
 	{ MODKEY,             XK_k,       focusstack,     {.i = -1 } }, // Move focus to the previous window
 	{ MODKEY|ControlMask, XK_i,       incnmaster,     {.i = +1 } }, // Increase the number of windows in the master area
 	{ MODKEY|ControlMask, XK_d,       incnmaster,     {.i = -1 } }, // Decrease the number of windows in the master area
-	{ MODKEY,             XK_h,       setmfact,       {.f = -0.05} }, // Decrease the size of the master area
-	{ MODKEY,             XK_l,       setmfact,       {.f = +0.05} }, // Increase the size of the master area
+	{ MODKEY|ShiftMask,   XK_n,       setmfact,       {.f = -0.05} }, // Decrease the size of the master area
+	{ MODKEY|ShiftMask,   XK_m,       setmfact,       {.f = +0.05} }, // Increase the size of the master area
 	{ MODKEY|ShiftMask,   XK_j,       movestack,      {.i = +1 } }, // Move the focused window down the stack
 	{ MODKEY|ShiftMask,   XK_k,       movestack,      {.i = -1 } }, // Move the focused window up the stack
 	{ MODKEY|ShiftMask,   XK_Return,  zoom,           {0} }, // Promote the focused window to the master area
@@ -111,14 +119,20 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask, XK_m,       setlayout,      {.v = &layouts[2]} }, // Set layout to monocle (fullscreen)
 	{ MODKEY,             XK_space,   setlayout,      {0} }, // Toggle between current and previous layout
 	{ MODKEY|ShiftMask,   XK_space,   togglefloating, {0} }, // Toggle floating mode for the focused window
-	{ MODKEY,             XK_comma,   focusmon,       {.i = -1 } }, // Move focus to the previous monitor
-	{ MODKEY,             XK_period,  focusmon,       {.i = +1 } }, // Move focus to the next monitor
+	{ MODKEY|ControlMask, XK_j,       focusmon,       {.i = -1 } }, // Move focus to the previous monitor
+	{ MODKEY|ControlMask, XK_k,       focusmon,       {.i = +1 } }, // Move focus to the next monitor
 	{ MODKEY,             XK_Left,    shiftview,      {.ui = -1 } }, // Super + Left Arrow Switch to the previous tag
 	{ MODKEY,             XK_Right,   shiftview,      {.ui = +1 } }, // Super + Right Arrow Switch to the next tag
+	{ MODKEY,             XK_h,       shiftview,      {.ui = -1 } }, // Super + h Switch to the previous tag
+	{ MODKEY,             XK_l,       shiftview,      {.ui = +1 } }, // Super + l Switch to the next tag
 	{ MODKEY|ShiftMask,   XK_Left,    shifttag,       {.ui = -1 } }, // Super + Shift + Left Arrow Move client to the previous tag
 	{ MODKEY|ShiftMask,   XK_Right,   shifttag,       {.ui = +1 } }, // Super + Shift + Right Arrow Move client to the next tag
+	{ MODKEY|ShiftMask,   XK_h,       shifttag,       {.ui = -1 } }, // Super + Shift + h Move client to the previous tag
+	{ MODKEY|ShiftMask,   XK_l,       shifttag,       {.ui = +1 } }, // Super + Shift + l Move client to the next tag
 	{ MODKEY|ControlMask, XK_Left,    tagmon,         {.i = -1 } }, // Super + Ctrl + Left Arrow Move client to the previous monitor
 	{ MODKEY|ControlMask, XK_Right,   tagmon,         {.i = +1 } }, // Super + Ctrl + Right Arrow Move client to the next monitor
+	{ MODKEY|ControlMask, XK_h,       tagmon,         {.i = -1 } }, // Super + Ctrl + h Move client to the previous monitor
+	{ MODKEY|ControlMask, XK_l,       tagmon,         {.i = +1 } }, // Super + Ctrl + l Move client to the next monitor
 	{ MODKEY|ControlMask, XK_Return,  focusmaster,    {0} }, // Super + Ctrl + Enter Move focus to the master window
 	{ MODKEY|ControlMask, XK_q,       quit,           {1} }, // Super + Ctrl + q Restart dwm
 	{ MODKEY,             XK_0,       view,           {.ui = ~0 } }, // View all tags (show all windows)
