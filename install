@@ -1,0 +1,9 @@
+#!/bin/env sh
+set -e
+VERSION=6.5
+PREFIX=/usr/local
+MANPREFIX=${PREFIX}/share/man
+install -Dm755 dwm ${PREFIX}/bin/dwm
+install -Dm644 dwm.1 ${MANPREFIX}/man1/dwm.1
+sed -i "s/VERSION/${VERSION}/g" ${MANPREFIX}/man1/dwm.1
+echo "dwm installed."
