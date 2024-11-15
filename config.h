@@ -6,19 +6,19 @@ static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char *fonts[]          = { "Terminess Nerd Font:size=11" };
+static const char dmenufont[]       = "Terminess Nerd Font:size=11";
+static const char col_gray1[]       = "#2F4F4F";  /* Dark Slate Gray for background */
+static const char col_gray2[]       = "#8B0000";  /* Dark Red for borders */
+static const char col_gray3[]       = "#D3D3D3";  /* Light Gray for normal text */
+static const char col_gray4[]       = "#FFFFFF";  /* White for active text */
+static const char col_active[]      = "#A40000";  /* Crimson Red for active */
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_active, col_active },
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
@@ -65,7 +65,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_active, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 #include "movestack.c"
 static const Key keys[] = {
@@ -75,6 +75,7 @@ static const Key keys[] = {
 	{ MODKEY,             XK_c,	      spawn,          SHCMD("code") }, // Super + c Launch code
 	{ MODKEY|ShiftMask,   XK_c,	      spawn,          SHCMD("chromium") }, // Super + Shift + c Launch chromium
 	{ MODKEY,             XK_w,       spawn,          SHCMD("firefox -P me") }, // Super + w Launch firefox
+	{ MODKEY|ShiftMask,   XK_w,       spawn,          SHCMD("firefox -P rel") }, // Super + Shift + w Launch firefox with relaxed profile
 	{ MODKEY,             XK_x,       spawn,          SHCMD("keepassxc") }, // Super + x Launch keepassxc
 	{ MODKEY,             XK_v,       spawn,          SHCMD("virt-manager") }, // Super + v Launch virt-manager
 	{ MODKEY,             XK_d,       spawn,          SHCMD("arandr") }, // Super + f Launch display settings
@@ -90,6 +91,7 @@ static const Key keys[] = {
 	{ MODKEY,             XK_y,       spawn,          SHCMD("yt stream") }, // Super + y Stream youtube video to mpv
 	{ MODKEY|ShiftMask,   XK_y,       spawn,          SHCMD("yt mp4") }, // Super + Shift + y Download youtube video
 	{ MODKEY|ControlMask, XK_y,       spawn,          SHCMD("yt mp3") }, // Super + Ctrl + y Download youtube video as mp3
+	{ MODKEY|ControlMask, XK_w,       spawn,          SHCMD("st -e \"$HOME/.config/X11/monitors\"") }, // Super + Ctrl + w Change monitor config
 	{ 0,                  XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // PrtSc Print Selection and copy
 	{ ShiftMask,          XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift + PrtSc Print Selection and save
 	{ MODKEY,             XK_Print,   spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }, // Super + Print Screen and copy

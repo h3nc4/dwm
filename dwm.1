@@ -49,108 +49,267 @@ label toggles between tiled and floating layout.
 .B Button3
 click on a tag label adds/removes all windows with that tag to/from the view.
 .TP
-.B Mod1\-Button1
+.B Super\-Button1
 click on a tag label applies that tag to the focused window.
 .TP
-.B Mod1\-Button3
+.B Super\-Button3
 click on a tag label adds/removes that tag to/from the focused window.
 .SS Keyboard commands
 .TP
-.B Mod1\-Shift\-Return
+.B Super\-Shift\-Return
 Start
-.BR st(1).
+.BR dmenu (1)
 .TP
-.B Mod1\-p
-Spawn
-.BR dmenu(1)
-for launching other programs.
+.B Super\-q
+Launch
+.BR st (1)
 .TP
-.B Mod1\-,
-Focus previous screen, if any.
+.B Super\-c
+Launch
+.BR code (1)
 .TP
-.B Mod1\-.
-Focus next screen, if any.
+.B Super\-Shift\-c
+Launch
+.BR chromium (1)
 .TP
-.B Mod1\-Shift\-,
-Send focused window to previous screen, if any.
+.B Super\-w
+Launch
+.BR firefox (1)
+with the profile "me"
 .TP
-.B Mod1\-Shift\-.
-Send focused window to next screen, if any.
+.B Super\-Shift\-w
+Launch
+.BR firefox (1)
+with the profile "rel"
 .TP
-.B Mod1\-b
-Toggles bar on and off.
+.B Super\-x
+Launch
+.BR keepassxc (1)
 .TP
-.B Mod1\-t
-Sets tiled layout.
+.B Super\-v
+Launch
+.BR virt-manager (1)
 .TP
-.B Mod1\-f
-Sets floating layout.
+.B Super\-d
+Launch
+.BR arandr (1)
 .TP
-.B Mod1\-m
-Sets monocle layout.
+.B Super\-e
+Launch
+.BR lf (1)
 .TP
-.B Mod1\-space
-Toggles between current and previous layout.
+.B Super\-Shift\-Escape
+Launch
+.BR htop (1)
 .TP
-.B Mod1\-j
+.B Super\-r
+Launch
+.BR newsboat (1)
+.TP
+.B Super\-Shift\-v
+Launch
+.BR nvim (1)
+.TP
+.B Super\-n
+Launch
+.BR nmtui (1)
+.TP
+.B Super\-p
+Launch
+.BR pulsemixer (1)
+.TP
+.B Super\-s
+Suspend with
+.BR doas
+.BR systemctl
+.BR suspend
+.TP
+.B Super\-Shift\-s
+Shutdown with
+.BR doas
+.BR poweroff
+.TP
+.B Super\-Shift\-r
+Reboot with
+.BR doas
+.BR reboot
+.TP
+.B Super\-y
+Stream YouTube video to
+.BR mpv (1)
+.TP
+.B Super\-Shift\-y
+Download a YouTube video (mp4).
+.TP
+.B Super\-Control\-y
+Download a YouTube video as an mp3.
+.TP
+.B Print
+Take a screenshot of the selection and copy it to the clipboard.
+.TP
+.B Shift\-Print
+Saves a screenshot of the selection to your cache directory with a timestamp.
+.TP
+.B Super\-Print
+Take a screenshot and copy it to the clipboard.
+.TP
+.B Super\-Shift\-Print
+Saves a screenshot to your cache directory with a timestamp.
+.TP
+.B Super\-F1
+Mute audio via
+.BR pulsemixer (1)
+.TP
+.B Super\-Shift\-F1
+Unmute audio via
+.BR pulsemixer (1)
+.TP
+.B Super\-F2
+Decrease volume by 5%.
+.TP
+.B Super\-F3
+Increase volume by 5%.
+.TP
+.B Super\-F4
+Set volume to 100%.
+.TP
+.B Super\-F5
+Restart
+.BR NetworkManager (1)
+with
+.BR systemctl (1)
+.TP
+.B Super\-F11
+Decrease brightness.
+.TP
+.B Super\-F12
+Increase brightness.
+.TP
+.B Super\-b
+Toggle the status bar.
+.TP
+.B Super\-j
 Focus next window.
 .TP
-.B Mod1\-k
+.B Super\-k
 Focus previous window.
 .TP
-.B Mod1\-i
+.B Super\-Control\-i
 Increase number of windows in master area.
 .TP
-.B Mod1\-d
+.B Super\-Control\-d
 Decrease number of windows in master area.
 .TP
-.B Mod1\-l
-Increase master area size.
+.B Super\-Shift\-n
+Decrease size of master area.
 .TP
-.B Mod1\-h
-Decrease master area size.
+.B Super\-Shift\-m
+Increase size of master area.
 .TP
-.B Mod1\-Return
-Zooms/cycles focused window to/from master area (tiled layouts only).
+.B Super\-Shift\-j
+Move focused window down the stack.
 .TP
-.B Mod1\-Shift\-c
+.B Super\-Shift\-k
+Move focused window up the stack.
+.TP
+.B Super\-Shift\-Return
+Zoom focused window.
+.TP
+.B Super\-Tab
+Switch to previously selected tag.
+.TP
+.B Super\-a
 Close focused window.
 .TP
-.B Mod1\-Shift\-space
-Toggle focused window between tiled and floating state.
+.B Super\-Control\-t
+Set layout to tiled.
 .TP
-.B Mod1\-Tab
-Toggles to the previously selected tags.
+.B Super\-Control\-f
+Set layout to floating.
 .TP
-.B Mod1\-Shift\-[1..n]
-Apply nth tag to focused window.
+.B Super\-Control\-m
+Set layout to monocle.
 .TP
-.B Mod1\-Shift\-0
-Apply all tags to focused window.
+.B Super\-space
+Toggle between current and previous layout.
 .TP
-.B Mod1\-Control\-Shift\-[1..n]
-Add/remove nth tag to/from focused window.
+.B Super\-Shift\-space
+Toggle floating mode for focused window.
 .TP
-.B Mod1\-[1..n]
-View all windows with nth tag.
+.B Super\-Control\-j
+Move focus to previous monitor.
 .TP
-.B Mod1\-0
-View all windows with any tag.
+.B Super\-Control\-k
+Move focus to next monitor.
 .TP
-.B Mod1\-Control\-[1..n]
-Add/remove all windows with nth tag to/from the view.
+.B Super\-Left
+Switch to previous tag.
 .TP
-.B Mod1\-Shift\-q
-Quit dwm.
+.B Super\-Right
+Switch to next tag.
+.TP
+.B Super\-h
+Switch to previous tag.
+.TP
+.B Super\-l
+Switch to next tag.
+.TP
+.B Super\-Shift\-Left
+Move client to previous tag.
+.TP
+.B Super\-Shift\-Right
+Move client to next tag.
+.TP
+.B Super\-Shift\-h
+Move client to previous tag.
+.TP
+.B Super\-Shift\-l
+Move client to next tag.
+.TP
+.B Super\-Control\-Left
+Move client to previous monitor.
+.TP
+.B Super\-Control\-Right
+Move client to next monitor.
+.TP
+.B Super\-Control\-h
+Move client to previous monitor.
+.TP
+.B Super\-Control\-l
+Move client to next monitor.
+.TP
+.B Super\-Control\-Return
+Move focus to master window.
+.TP
+.B Super\-Control\-q
+Restart dwm.
+.TP
+.B Super\-0
+View all windows.
+.TP
+.B Super\-Shift\-0
+Tag focused window with all tags.
+.TP
+.B Super\-[1..9]
+Switch to tag [1..9].
+.TP
+.B Super\-Control\-[1..9]
+Add/remove all windows with tag [1..9] to/from the view.
+.TP
+.B Super\-Shift\-[1..9]
+Apply tag [1..9] to focused window.
+.TP
+.B Super\-Control\-Shift\-[1..9]
+Add/remove tag [1..9] to/from focused window.
 .SS Mouse commands
 .TP
-.B Mod1\-Button1
+.B Super\-Button1
 Move focused window while dragging. Tiled windows will be toggled to the floating state.
 .TP
-.B Mod1\-Button2
+.B Super\-Button2
 Toggles focused window between floating and tiled state.
 .TP
-.B Mod1\-Button3
+.B Super\-Button3
 Resize focused window while dragging. Tiled windows will be toggled to the floating state.
 .SH CUSTOMIZATION
 dwm is customized by creating a custom config.h and (re)compiling the source
