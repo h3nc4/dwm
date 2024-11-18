@@ -85,13 +85,14 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,   XK_v,       spawn,          SHCMD("st -e nvim") }, // Super + Shift + v Launch nvim
 	{ MODKEY,             XK_n,       spawn,          SHCMD("st -e nmtui") }, // Super + n Launch nmtui
 	{ MODKEY,             XK_p,       spawn,          SHCMD("st -e pulsemixer") }, // Super + p Launch pulsemixer
-	{ MODKEY,             XK_s,       spawn,          SHCMD("doas systemctl suspend") }, // Super + s Suspend
+	{ MODKEY,             XK_s,       spawn,          SHCMD("echo mem | doas tee /sys/power/state") }, // Super + s Suspend
+	{ MODKEY|ControlMask, XK_s,       spawn,          SHCMD("echo disk | doas tee /sys/power/state") }, // Super + Shift + h Hibernate
 	{ MODKEY|ShiftMask,   XK_s,       spawn,          SHCMD("doas poweroff") }, // Super + Shift + s Shutdown
 	{ MODKEY|ShiftMask,   XK_r,       spawn,          SHCMD("doas reboot") }, // Super + Shift + r Reboot
 	{ MODKEY,             XK_y,       spawn,          SHCMD("yt stream") }, // Super + y Stream youtube video to mpv
 	{ MODKEY|ShiftMask,   XK_y,       spawn,          SHCMD("yt mp4") }, // Super + Shift + y Download youtube video
 	{ MODKEY|ControlMask, XK_y,       spawn,          SHCMD("yt mp3") }, // Super + Ctrl + y Download youtube video as mp3
-	{ MODKEY|ControlMask, XK_w,       spawn,          SHCMD("st -e \"$HOME/.config/X11/monitors\"") }, // Super + Ctrl + w Change monitor config
+	{ MODKEY|ControlMask, XK_w,       spawn,          SHCMD("\"$HOME/.config/X11/monitors\"") }, // Super + Ctrl + w Change monitor config
 	{ 0,                  XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // PrtSc Print Selection and copy
 	{ ShiftMask,          XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift + PrtSc Print Selection and save
 	{ MODKEY,             XK_Print,   spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }, // Super + Print Screen and copy
@@ -101,7 +102,6 @@ static const Key keys[] = {
 	{ MODKEY,             XK_F2,      spawn,          SHCMD("pulsemixer --unmute --change-volume -5") }, // Super + F2 Decrease volume
 	{ MODKEY,             XK_F3,      spawn,          SHCMD("pulsemixer --unmute --change-volume +5") }, // Super + F3 Increase volume
 	{ MODKEY,             XK_F4,      spawn,          SHCMD("pulsemixer --unmute --set-volume 100") }, // Super + F4 Set volume to default
-	{ MODKEY,             XK_F5,      spawn,          SHCMD("doas systemctl restart NetworkManager") }, // Super + F5 Restart Wifi
 	{ MODKEY,             XK_F11,     spawn,          SHCMD("doas brightnessctl set 10%%-") }, // Super + F11 Decrease brightness
 	{ MODKEY,             XK_F12,     spawn,          SHCMD("doas brightnessctl set +10%%") }, // Super + F12 Increase brightness
 	{ MODKEY,             XK_b,       togglebar,      {0} }, // Toggle the status bar
