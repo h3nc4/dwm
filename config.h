@@ -72,79 +72,78 @@ static const char *termcmd[]  = { "st", NULL };
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier    key         function        argument */
-	{ MODKEY|SHFT, XK_0,       tag,            {.ui = ~0 } }, // Tag the focused window with all tags
-	{ MODKEY,      XK_0,       view,           {.ui = ~0 } }, // View all tags (show all windows)
-	{ MODKEY,      XK_a,       killclient,     {0} }, // Super + a Close the focused window
-	{ MODKEY|SHFT, XK_a,       spawn,          SHCMD("pkill sxac || sxac") }, // Super + Shift + c Launch chromium
-	{ MODKEY,      XK_b,       togglebar,      {0} }, // Toggle the status bar
-	{ MODKEY|SHFT, XK_c,       spawn,          SHCMD("chromium") }, // Super + Shift + c Launch chromium
-	{ MODKEY,      XK_c,       spawn,          SHCMD("codium") }, // Super + c Launch codium
-	{ MODKEY|CTRL, XK_d,       incnmaster,     {.i = -1 } }, // Decrease the number of windows in the master area
-	{ MODKEY,      XK_d,       spawn,          SHCMD("arandr") }, // Super + f Launch display settings
-	{ MODKEY|SHFT, XK_Escape,  spawn,          SHCMD("st -e htop") }, // Super + Shift + esc Launch htop
-	{ MODKEY,      XK_e,       spawn,          SHCMD("st -e lf") }, // Super + e Launch lf
-	{ MODKEY,      XK_F11,     spawn,          SHCMD("doas brightnessctl set 10%%-") }, // Super + F11 Decrease brightness
-	{ MODKEY,      XK_F12,     spawn,          SHCMD("doas brightnessctl set +10%%") }, // Super + F12 Increase brightness
-	{ MODKEY,      XK_F1,      spawn,          SHCMD("pulsemixer --mute") }, // Super + F1 Mute volume
-	{ MODKEY|SHFT, XK_F1,      spawn,          SHCMD("pulsemixer --unmute") }, // Super + Shift + F1 Unmute volume
-	{ MODKEY,      XK_F2,      spawn,          SHCMD("pulsemixer --unmute --change-volume -5") }, // Super + F2 Decrease volume
-	{ MODKEY,      XK_F3,      spawn,          SHCMD("pulsemixer --unmute --change-volume +5") }, // Super + F3 Increase volume
-	{ MODKEY,      XK_F4,      spawn,          SHCMD("pulsemixer --unmute --set-volume 100") }, // Super + F4 Set volume to default
-	{ MODKEY|CTRL, XK_f,       setlayout,      {.v = &layouts[1]} }, // Set layout to floating
-	{ MODKEY|SHFT, XK_h,       shifttag,       {.ui = -1 } }, // Super + Shift + h Move client to the previous tag
-	{ MODKEY,      XK_h,       shiftview,      {.ui = -1 } }, // Super + h Switch to the previous tag
-	{ MODKEY|CTRL, XK_h,       tagmon,         {.i = -1 } }, // Super + Ctrl + h Move client to the previous monitor
-	{ MODKEY|CTRL, XK_i,       incnmaster,     {.i = +1 } }, // Increase the number of windows in the master area
-	{ MODKEY|CTRL, XK_j,       focusmon,       {.i = -1 } }, // Move focus to the previous monitor
-	{ MODKEY,      XK_j,       focusstack,     {.i = +1 } }, // Move focus to the next window
-	{ MODKEY|SHFT, XK_j,       movestack,      {.i = +1 } }, // Move the focused window down the stack
-	{ MODKEY|CTRL, XK_k,       focusmon,       {.i = +1 } }, // Move focus to the next monitor
-	{ MODKEY,      XK_k,       focusstack,     {.i = -1 } }, // Move focus to the previous window
-	{ MODKEY|SHFT, XK_k,       movestack,      {.i = -1 } }, // Move the focused window up the stack
-	{ MODKEY|SHFT, XK_Left,    shifttag,       {.ui = -1 } }, // Super + Shift + Left Arrow Move client to the previous tag
-	{ MODKEY,      XK_Left,    shiftview,      {.ui = -1 } }, // Super + Left Arrow Switch to the previous tag
-	{ MODKEY|CTRL, XK_Left,    tagmon,         {.i = -1 } }, // Super + Ctrl + Left Arrow Move client to the previous monitor
-	{ MODKEY|SHFT, XK_l,       shifttag,       {.ui = +1 } }, // Super + Shift + l Move client to the next tag
-	{ MODKEY,      XK_l,       shiftview,      {.ui = +1 } }, // Super + l Switch to the next tag
-	{ MODKEY|CTRL, XK_l,       tagmon,         {.i = +1 } }, // Super + Ctrl + l Move client to the next monitor
-	{ MODKEY|CTRL, XK_m,       setlayout,      {.v = &layouts[2]} }, // Set layout to monocle (fullscreen)
-	{ MODKEY|SHFT, XK_m,       setmfact,       {.f = +0.05} }, // Increase the size of the master area
-	{ MODKEY,      XK_m,       spawn,          SHCMD("st -e aerc") }, // Super + m Launch aerc
-	{ MODKEY|SHFT, XK_n,       setmfact,       {.f = -0.05} }, // Decrease the size of the master area
-	{ MODKEY,      XK_n,       spawn,          SHCMD("st -e nmtui") }, // Super + n Launch nmtui
-	{ MODKEY|SHFT, XK_Print,   spawn,          SHCMD("maim \"$HOME/.cache/$(date +%s).png\"") }, // Super + Shift + Print Screen and save
-	{ ShiftMask,   XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift + PrtSc Print Selection and save
-	{ 0,           XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // PrtSc Print Selection and copy
-	{ MODKEY,      XK_Print,   spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }, // Super + Print Screen and copy
-	{ MODKEY,      XK_p,       spawn,          SHCMD("st -e pulsemixer") }, // Super + p Launch pulsemixer
-	{ MODKEY|CTRL, XK_q,       spawn,          SHCMD("doas openvt -c7 -- sh -c \"USER=$USER vlock -a; chvt 1\" && doas chvt 7") }, // Super + Ctrl + q Lock screen
-	{ MODKEY,      XK_q,       spawn,          {.v = termcmd } },  // Launch terminal
-	{ MODKEY|CTRL, XK_Return,  focusmaster,    {0} }, // Super + Ctrl + Enter Move focus to the master window
-	{ MODKEY|SHFT, XK_Return,  zoom,           {0} }, // Promote the focused window to the master area
-	{ MODKEY|SHFT, XK_Right,   shifttag,       {.ui = +1 } }, // Super + Shift + Right Arrow Move client to the next tag
-	{ MODKEY,      XK_Right,   shiftview,      {.ui = +1 } }, // Super + Right Arrow Switch to the next tag
-	{ MODKEY|CTRL, XK_Right,   tagmon,         {.i = +1 } }, // Super + Ctrl + Right Arrow Move client to the next monitor
-	{ MODKEY|SHFT, XK_r,       spawn,          SHCMD("doas reboot") }, // Super + Shift + r Reboot
-	{ MODKEY,      XK_r,       spawn,          SHCMD("st -e newsboat") }, // Super + r Launch newsboat
-	{ MODKEY,      XK_Shift_R, spawn,          {.v = dmenucmd } }, // Launch dmenu
-	{ MODKEY,      XK_space,   setlayout,      {0} }, // Toggle between current and previous layout
-	{ MODKEY|SHFT, XK_space,   togglefloating, {0} }, // Toggle floating mode for the focused window
-	{ MODKEY|SHFT, XK_s,       spawn,          SHCMD("doas poweroff") }, // Super + Shift + s Shutdown
-	{ MODKEY|CTRL, XK_s,       spawn,          SHCMD("echo disk | doas tee /sys/power/state") }, // Super + Shift + h Hibernate
-	{ MODKEY,      XK_s,       spawn,          SHCMD("echo mem | doas tee /sys/power/state") }, // Super + s Suspend
-	{ MODKEY|CTRL, XK_Tab,     quit,           {1} }, // Super + Ctrl + tab Restart dwm
-	{ MODKEY|SHFT, XK_Tab,     spawn,          SHCMD("\"$HOME/.config/X11/monitors\"") }, // Super + shift + tab Change monitor config
-	{ MODKEY,      XK_Tab,     view,           {0} }, // Switch to the previously selected tag
-	{ MODKEY|CTRL, XK_t,       setlayout,      {.v = &layouts[0]} }, // Set layout to tile
-	{ MODKEY|SHFT, XK_v,       spawn,          SHCMD("st -e nvim") }, // Super + Shift + v Launch nvim
-	{ MODKEY,      XK_v,       spawn,          SHCMD("virt-manager") }, // Super + v Launch virt-manager
-	{ MODKEY,      XK_w,       spawn,          SHCMD("firefox -P me") }, // Super + w Launch firefox
-	{ MODKEY|SHFT, XK_w,       spawn,          SHCMD("firefox -P rel") }, // Super + Shift + w Launch firefox with relaxed profile
-	{ MODKEY|CTRL, XK_w,       spawn,          SHCMD("tor-browser") }, // Super + Ctrl + w Launch tor browser
-	{ MODKEY,      XK_x,       spawn,          SHCMD("keepassxc") }, // Super + x Launch keepassxc
-	{ MODKEY|CTRL, XK_y,       spawn,          SHCMD("yt mp3") }, // Super + Ctrl + y Download youtube video as mp3
-	{ MODKEY|SHFT, XK_y,       spawn,          SHCMD("yt mp4") }, // Super + Shift + y Download youtube video
-	{ MODKEY,      XK_y,       spawn,          SHCMD("yt stream") }, // Super + y Stream youtube video to mpv
+	{ MODKEY|SHFT, XK_0,       tag,            {.ui = ~0 } }, // Super+Shift+0 Tag the focused window with all tags
+	{ MODKEY,      XK_0,       view,           {.ui = ~0 } }, // Super+0 View all tags (show all windows)
+	{ MODKEY,      XK_a,       killclient,     {0} }, // Super+a Close the focused window
+	{ MODKEY|SHFT, XK_a,       spawn,          SHCMD("pkill sxac || sxac") }, // Super+Shift+a Toggle Simple X Auto Clicker (kill if running, otherwise launch)
+	{ MODKEY,      XK_b,       togglebar,      {0} }, // Super+b Toggle the status bar
+	{ MODKEY|SHFT, XK_c,       spawn,          SHCMD("chromium") }, // Super+Shift+c Launch Chromium
+	{ MODKEY,      XK_c,       spawn,          SHCMD("codium") }, // Super+c Launch Codium
+	{ MODKEY|CTRL, XK_d,       incnmaster,     {.i = -1 } }, // Super+Ctrl+d Decrease the number of windows in the master area
+	{ MODKEY,      XK_d,       spawn,          SHCMD("arandr") }, // Super+d Launch display settings (arandr)
+	{ MODKEY|SHFT, XK_Escape,  spawn,          SHCMD("st -e htop") }, // Super+Shift+Escape Launch htop
+	{ MODKEY,      XK_e,       spawn,          SHCMD("st -e lf") }, // Super+e Launch lf
+	{ MODKEY,      XK_F11,     spawn,          SHCMD("doas brightnessctl set 10%%-") }, // Super+F11 Decrease brightness by 10%
+	{ MODKEY,      XK_F12,     spawn,          SHCMD("doas brightnessctl set +10%%") }, // Super+F12 Increase brightness by 10%
+	{ MODKEY,      XK_F1,      spawn,          SHCMD("pulsemixer --mute") }, // Super+F1 Mute volume
+	{ MODKEY|SHFT, XK_F1,      spawn,          SHCMD("pulsemixer --unmute") }, // Super+Shift+F1 Unmute volume
+	{ MODKEY,      XK_F2,      spawn,          SHCMD("pulsemixer --unmute --change-volume -5") }, // Super+F2 Decrease volume by 5
+	{ MODKEY,      XK_F3,      spawn,          SHCMD("pulsemixer --unmute --change-volume +5") }, // Super+F3 Increase volume by 5
+	{ MODKEY,      XK_F4,      spawn,          SHCMD("pulsemixer --unmute --set-volume 100") }, // Super+F4 Set volume to (100)
+	{ MODKEY|CTRL, XK_f,       setlayout,      {.v = &layouts[1]} }, // Super+Ctrl+f Set layout to floating
+	{ MODKEY|SHFT, XK_h,       shifttag,       {.ui = -1 } }, // Super+Shift+h Move client to the previous tag
+	{ MODKEY,      XK_h,       shiftview,      {.ui = -1 } }, // Super+h Switch to the previous tag
+	{ MODKEY|CTRL, XK_h,       tagmon,         {.i = -1 } }, // Super+Ctrl+h Move client to the previous monitor
+	{ MODKEY|CTRL, XK_i,       incnmaster,     {.i = +1 } }, // Super+Ctrl+i Increase the number of windows in the master area
+	{ MODKEY|CTRL, XK_j,       focusmon,       {.i = -1 } }, // Super+Ctrl+j Move focus to the previous monitor
+	{ MODKEY,      XK_j,       focusstack,     {.i = +1 } }, // Super+j Move focus to the next window
+	{ MODKEY|SHFT, XK_j,       movestack,      {.i = +1 } }, // Super+Shift+j Move the focused window down the stack
+	{ MODKEY|CTRL, XK_k,       focusmon,       {.i = +1 } }, // Super+Ctrl+k Move focus to the next monitor
+	{ MODKEY,      XK_k,       focusstack,     {.i = -1 } }, // Super+k Move focus to the previous window
+	{ MODKEY|SHFT, XK_k,       movestack,      {.i = -1 } }, // Super+Shift+k Move the focused window up the stack
+	{ MODKEY|SHFT, XK_Left,    shifttag,       {.ui = -1 } }, // Super+Shift+Left Move client to the previous tag
+	{ MODKEY,      XK_Left,    shiftview,      {.ui = -1 } }, // Super+Left Switch to the previous tag
+	{ MODKEY|CTRL, XK_Left,    tagmon,         {.i = -1 } }, // Super+Ctrl+Left Move client to the previous monitor
+	{ MODKEY|SHFT, XK_l,       shifttag,       {.ui = +1 } }, // Super+Shift+l Move client to the next tag
+	{ MODKEY,      XK_l,       shiftview,      {.ui = +1 } }, // Super+l Switch to the next tag
+	{ MODKEY|CTRL, XK_l,       tagmon,         {.i = +1 } }, // Super+Ctrl+l Move client to the next monitor
+	{ MODKEY|CTRL, XK_m,       setlayout,      {.v = &layouts[2]} }, // Super+Ctrl+m Set layout to monocle (fullscreen)
+	{ MODKEY|SHFT, XK_m,       setmfact,       {.f = +0.05} }, // Super+Shift+m Increase the size of the master area
+	{ MODKEY,      XK_m,       spawn,          SHCMD("st -e aerc") }, // Super+m Launch aerc
+	{ MODKEY|SHFT, XK_n,       setmfact,       {.f = -0.05} }, // Super+Shift+n Decrease the size of the master area
+	{ MODKEY|SHFT, XK_Print,   spawn,          SHCMD("maim \"$HOME/.cache/$(date +%s).png\"") }, // Super+Shift+Print Take a screenshot and save it
+	{ ShiftMask,   XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift+Print Take a screenshot of a selected area and save it
+	{ 0,           XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // Print Take a screenshot of a selected area and copy it to the clipboard
+	{ MODKEY,      XK_Print,   spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }, // Super+Print Take a screenshot and copy it to the clipboard
+	{ MODKEY,      XK_p,       spawn,          SHCMD("st -e pulsemixer") }, // Super+p Launch pulsemixer
+	{ MODKEY|CTRL, XK_q,       spawn,          SHCMD("doas openvt -c7 -- sh -c \"USER=$USER vlock -a; chvt 1\" && doas chvt 7") }, // Super+Ctrl+q Lock screen
+	{ MODKEY,      XK_q,       spawn,          {.v = termcmd } }, // Super+q Launch terminal
+	{ MODKEY|CTRL, XK_Return,  focusmaster,    {0} }, // Super+Ctrl+Enter Move focus to the master window
+	{ MODKEY|SHFT, XK_Return,  zoom,           {0} }, // Super+Shift+Enter Promote the focused window to the master area
+	{ MODKEY|SHFT, XK_Right,   shifttag,       {.ui = +1 } }, // Super+Shift+Right Move client to the next tag
+	{ MODKEY,      XK_Right,   shiftview,      {.ui = +1 } }, // Super+Right Switch to the next tag
+	{ MODKEY|CTRL, XK_Right,   tagmon,         {.i = +1 } }, // Super+Ctrl+Right Move client to the next monitor
+	{ MODKEY|SHFT, XK_r,       spawn,          SHCMD("doas reboot") }, // Super+Shift+r Reboot
+	{ MODKEY,      XK_r,       spawn,          SHCMD("st -e newsboat") }, // Super+r Launch newsboat
+	{ MODKEY,      XK_Shift_R, spawn,          {.v = dmenucmd } }, // Super+Right_Shift Launch dmenu
+	{ MODKEY,      XK_space,   setlayout,      {0} }, // Super+Space Toggle between current and previous layout
+	{ MODKEY|SHFT, XK_space,   togglefloating, {0} }, // Super+Shift+Space Toggle floating mode for the focused window
+	{ MODKEY|SHFT, XK_s,       spawn,          SHCMD("doas poweroff") }, // Super+Shift+s Shutdown
+	{ MODKEY|CTRL, XK_s,       spawn,          SHCMD("echo disk | doas tee /sys/power/state") }, // Super+Ctrl+s Hibernate to disk
+	{ MODKEY,      XK_s,       spawn,          SHCMD("echo mem | doas tee /sys/power/state") }, // Super+s Suspend to ram
+	{ MODKEY|CTRL, XK_Tab,     quit,           {1} }, // Super+Ctrl+Tab Restart dwm
+	{ MODKEY|SHFT, XK_Tab,     spawn,          SHCMD("\"$HOME/.config/X11/monitors\"") }, // Super+Shift+Tab Change monitor configuration
+	{ MODKEY,      XK_Tab,     view,           {0} }, // Super+Tab Switch to the previously selected tag
+	{ MODKEY|CTRL, XK_t,       setlayout,      {.v = &layouts[0]} }, // Super+Ctrl+t Set layout to tile
+	{ MODKEY|SHFT, XK_v,       spawn,          SHCMD("st -e nvim") }, // Super+Shift+v Launch nvim
+	{ MODKEY,      XK_v,       spawn,          SHCMD("virt-manager") }, // Super+v Launch virt-manager
+	{ MODKEY,      XK_w,       spawn,          SHCMD("firefox -P me") }, // Super+w Launch Firefox with profile "me"
+	{ MODKEY|SHFT, XK_w,       spawn,          SHCMD("firefox -P rel") }, // Super+Shift+w Launch Firefox with profile "rel"
+	{ MODKEY|CTRL, XK_w,       spawn,          SHCMD("tor-browser") }, // Super+Ctrl+w Launch Tor Browser
+	{ MODKEY,      XK_x,       spawn,          SHCMD("keepassxc") }, // Super+x Launch keepassxc
+	{ MODKEY|CTRL, XK_y,       spawn,          SHCMD("yt opus") }, // Super+Ctrl+y Download YouTube video as OPUS to "$HOME/media/music/%(title)s.%(ext)s"
+	{ MODKEY|SHFT, XK_y,       spawn,          SHCMD("yt mp4") }, // Super+Shift+y Download YouTube video as MP4 to "$HOME/media/vids/%(title)s.%(ext)s"
+	{ MODKEY,      XK_y,       spawn,          SHCMD("yt stream") }, // Super+y Stream YouTube video to mpv
 	TAGKEYS(XK_1, 0) // Switch to tag 1
 	TAGKEYS(XK_2, 1) // Switch to tag 2
 	TAGKEYS(XK_3, 2) // Switch to tag 3
