@@ -16,15 +16,19 @@ jobs:
         sudo apt-get install -y --no-install-recommends build-essential libxft-dev libxinerama-dev libxkbfile-dev
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: make
-      run: make all
-    - name: publish
-      uses: peaceiris/actions-gh-pages@v4
+    - name: Build tar
+      run: make dist.built
+    - name: Gen tag name
+      run: echo "SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-8)" >>$GITHUB_ENV
+    - name: Create tag
+      run: |
+        git tag ${{ env.SHORT_SHA }}
+        git push origin ${{ env.SHORT_SHA }}
+    - name: Release
+      uses: softprops/action-gh-release@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
-        publish_branch: build
-        force_orphan: true
-        enable_jekyll: true
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
+        tag_name: ${{ env.SHORT_SHA }}
+        files: |
+          dwm.tgz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
