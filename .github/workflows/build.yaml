@@ -2,26 +2,45 @@ name: Build dwm
 
 on:
   push:
-    branches:
-      - h3nc4
+    branches: [ 'h3nc4' ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm-slim
     steps:
     - name: Install dependencies
       run: |
-        export DEBIAN_FRONTEND=noninteractive
-        sudo apt-get update
-        sudo apt-get install -y --no-install-recommends build-essential libxft-dev libxinerama-dev libxkbfile-dev
+        apt-get update
+        DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+          ca-certificates \
+          gcc \
+          git \
+          libc-dev \
+          gpg \
+          gpg-agent \
+          libxft-dev \
+          libxinerama-dev \
+          libxkbfile-dev \
+          make
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Build tar
       run: make dist.built
     - name: Gen tag name
       run: echo "SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-8)" >>$GITHUB_ENV
+    - name: Import gpg key
+      run: echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+    - name: Sign artifact
+      run: gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" --detach-sign --armor -o dwm.tgz.asc dwm.tgz
+      env:
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
     - name: Create tag
       run: |
+        git config --global safe.directory '*'
         git tag ${{ env.SHORT_SHA }}
         git push origin ${{ env.SHORT_SHA }}
     - name: Release
@@ -29,6 +48,7 @@ jobs:
       with:
         tag_name: ${{ env.SHORT_SHA }}
         files: |
+          dwm.tgz.asc
           dwm.tgz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
