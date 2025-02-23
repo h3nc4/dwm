@@ -141,9 +141,9 @@ static const Key keys[] = {
 	{ MODKEY|SHFT, XK_w,       spawn,          SHCMD("firefox -P rel") }, // Super+Shift+w Launch Firefox with profile "rel"
 	{ MODKEY|CTRL, XK_w,       spawn,          SHCMD("tor-browser") }, // Super+Ctrl+w Launch Tor Browser
 	{ MODKEY,      XK_x,       spawn,          SHCMD("keepassxc") }, // Super+x Launch keepassxc
-	{ MODKEY|CTRL, XK_y,       spawn,          SHCMD("yt opus") }, // Super+Ctrl+y Download YouTube video as OPUS to "$HOME/media/music/%(title)s.%(ext)s"
-	{ MODKEY|SHFT, XK_y,       spawn,          SHCMD("yt mp4") }, // Super+Shift+y Download YouTube video as MP4 to "$HOME/media/vids/%(title)s.%(ext)s"
-	{ MODKEY,      XK_y,       spawn,          SHCMD("yt stream") }, // Super+y Stream YouTube video to mpv
+	{ MODKEY|CTRL, XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; ytopus") }, // Super+Ctrl+y Download copied YouTube video as OPUS to "$HOME/media/music/%(title)s.%(ext)s"
+	{ MODKEY|SHFT, XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; ytmp4") }, // Super+Shift+y Download copied YouTube video as MP4 to "$HOME/media/vids/%(title)s.%(ext)s"
+	{ MODKEY,      XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; ytstream") }, // Super+y Stream copied YouTube video to mpv
 	TAGKEYS(XK_1, 0) // Switch to tag 1
 	TAGKEYS(XK_2, 1) // Switch to tag 2
 	TAGKEYS(XK_3, 2) // Switch to tag 3
