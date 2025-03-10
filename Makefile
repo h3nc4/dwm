@@ -38,7 +38,7 @@ dist.built: all
 	echo 'install -Dm644 dwm.1 ${MANPREFIX}/man1/dwm.1' >>dwm-$(VERSION)/install
 	echo 'sed -i "s/VERSION/$(VERSION)/g" ${MANPREFIX}/man1/dwm.1' >>dwm-$(VERSION)/install
 	chmod +x dwm-$(VERSION)/install
-	tar czf dwm.tgz dwm-$(VERSION)
+	tar czf dwm.tar.gz dwm-$(VERSION)
 	rm -rf dwm-${VERSION}
 
 install: all
