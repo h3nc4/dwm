@@ -77,12 +77,12 @@ static const Key keys[] = {
 	{ MODKEY,      XK_a,       killclient,     {0} }, // Super+a Close the focused window
 	{ MODKEY|SHFT, XK_a,       spawn,          SHCMD("pkill sxac || sxac") }, // Super+Shift+a Toggle Simple X Auto Clicker (kill if running, otherwise launch)
 	{ MODKEY,      XK_b,       togglebar,      {0} }, // Super+b Toggle the status bar
-	{ MODKEY|SHFT, XK_c,       spawn,          SHCMD("chromium") }, // Super+Shift+c Launch Chromium
-	{ MODKEY,      XK_c,       spawn,          SHCMD("codium") }, // Super+c Launch Codium
+	{ MODKEY|SHFT, XK_c,       spawn,          SHCMD("exec chromium") }, // Super+Shift+c Launch Chromium
+	{ MODKEY,      XK_c,       spawn,          SHCMD("exec code") }, // Super+c Launch Codium
 	{ MODKEY|CTRL, XK_d,       incnmaster,     {.i = -1 } }, // Super+Ctrl+d Decrease the number of windows in the master area
-	{ MODKEY,      XK_d,       spawn,          SHCMD("arandr") }, // Super+d Launch display settings (arandr)
-	{ MODKEY|SHFT, XK_Escape,  spawn,          SHCMD("st -e htop") }, // Super+Shift+Escape Launch htop
-	{ MODKEY,      XK_e,       spawn,          SHCMD("st -e lf") }, // Super+e Launch lf
+	{ MODKEY,      XK_d,       spawn,          SHCMD("exec arandr") }, // Super+d Launch display settings (arandr)
+	{ MODKEY|SHFT, XK_Escape,  spawn,          SHCMD("exec st -e htop") }, // Super+Shift+Escape Launch htop
+	{ MODKEY,      XK_e,       spawn,          SHCMD("exec st -e lf") }, // Super+e Launch lf
 	{ MODKEY,      XK_F11,     spawn,          SHCMD("doas brightnessctl set 10%%-") }, // Super+F11 Decrease brightness by 10%
 	{ MODKEY,      XK_F12,     spawn,          SHCMD("doas brightnessctl set +10%%") }, // Super+F12 Increase brightness by 10%
 	{ MODKEY,      XK_F1,      spawn,          SHCMD("pulsemixer --mute") }, // Super+F1 Mute volume
@@ -109,13 +109,13 @@ static const Key keys[] = {
 	{ MODKEY|CTRL, XK_l,       tagmon,         {.i = +1 } }, // Super+Ctrl+l Move client to the next monitor
 	{ MODKEY|CTRL, XK_m,       setlayout,      {.v = &layouts[2]} }, // Super+Ctrl+m Set layout to monocle (fullscreen)
 	{ MODKEY|SHFT, XK_m,       setmfact,       {.f = +0.05} }, // Super+Shift+m Increase the size of the master area
-	{ MODKEY,      XK_m,       spawn,          SHCMD("st -e aerc") }, // Super+m Launch aerc
+	{ MODKEY,      XK_m,       spawn,          SHCMD("exec st -e aerc") }, // Super+m Launch aerc
 	{ MODKEY|SHFT, XK_n,       setmfact,       {.f = -0.05} }, // Super+Shift+n Decrease the size of the master area
-	{ MODKEY|SHFT, XK_Print,   spawn,          SHCMD("maim \"$HOME/.cache/$(date +%s).png\"") }, // Super+Shift+Print Take a screenshot and save it
-	{ ShiftMask,   XK_Print,   spawn,          SHCMD("maim -s \"$HOME/.cache/$(date +%s).png\"") }, // Shift+Print Take a screenshot of a selected area and save it
+	{ MODKEY|SHFT, XK_Print,   spawn,          SHCMD("maim \"$HOME/$(date +%s).png\"") }, // Super+Shift+Print Take a screenshot and save it
+	{ ShiftMask,   XK_Print,   spawn,          SHCMD("maim -s \"$HOME/$(date +%s).png\"") }, // Shift+Print Take a screenshot of a selected area and save it
 	{ 0,           XK_Print,   spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, // Print Take a screenshot of a selected area and copy it to the clipboard
 	{ MODKEY,      XK_Print,   spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }, // Super+Print Take a screenshot and copy it to the clipboard
-	{ MODKEY,      XK_p,       spawn,          SHCMD("st -e pulsemixer") }, // Super+p Launch pulsemixer
+	{ MODKEY,      XK_p,       spawn,          SHCMD("exec st -e pulsemixer") }, // Super+p Launch pulsemixer
 	{ MODKEY|CTRL, XK_q,       spawn,          SHCMD("doas openvt -c7 -- sh -c \"USER=$USER vlock -a; chvt 1\" && doas chvt 7") }, // Super+Ctrl+q Lock screen
 	{ MODKEY,      XK_q,       spawn,          {.v = termcmd } }, // Super+q Launch terminal
 	{ MODKEY|CTRL, XK_Return,  focusmaster,    {0} }, // Super+Ctrl+Enter Move focus to the master window
@@ -124,26 +124,26 @@ static const Key keys[] = {
 	{ MODKEY,      XK_Right,   shiftview,      {.ui = +1 } }, // Super+Right Switch to the next tag
 	{ MODKEY|CTRL, XK_Right,   tagmon,         {.i = +1 } }, // Super+Ctrl+Right Move client to the next monitor
 	{ MODKEY|SHFT, XK_r,       spawn,          SHCMD("doas reboot") }, // Super+Shift+r Reboot
-	{ MODKEY,      XK_r,       spawn,          SHCMD("st -e newsboat") }, // Super+r Launch newsboat
+	{ MODKEY,      XK_r,       spawn,          SHCMD("exec st -e newsboat") }, // Super+r Launch newsboat
 	{ MODKEY,      XK_Shift_R, spawn,          {.v = dmenucmd } }, // Super+Right_Shift Launch dmenu
 	{ MODKEY,      XK_space,   setlayout,      {0} }, // Super+Space Toggle between current and previous layout
 	{ MODKEY|SHFT, XK_space,   togglefloating, {0} }, // Super+Shift+Space Toggle floating mode for the focused window
 	{ MODKEY|SHFT, XK_s,       spawn,          SHCMD("doas poweroff") }, // Super+Shift+s Shutdown
 	{ MODKEY|CTRL, XK_s,       spawn,          SHCMD("echo disk | doas tee /sys/power/state") }, // Super+Ctrl+s Hibernate to disk
-	{ MODKEY,      XK_s,       spawn,          SHCMD("echo mem | doas tee /sys/power/state") }, // Super+s Suspend to ram
+	{ MODKEY,      XK_s,       spawn,          SHCMD("doas nvidia-suspend-mem || echo mem | doas tee /sys/power/state") }, // Super+s Suspend to ram
 	{ MODKEY|CTRL, XK_Tab,     quit,           {1} }, // Super+Ctrl+Tab Restart dwm
 	{ MODKEY|SHFT, XK_Tab,     spawn,          SHCMD("\"$HOME/.config/X11/monitors\"") }, // Super+Shift+Tab Change monitor configuration
 	{ MODKEY,      XK_Tab,     view,           {0} }, // Super+Tab Switch to the previously selected tag
 	{ MODKEY|CTRL, XK_t,       setlayout,      {.v = &layouts[0]} }, // Super+Ctrl+t Set layout to tile
-	{ MODKEY|SHFT, XK_v,       spawn,          SHCMD("st -e nvim") }, // Super+Shift+v Launch nvim
-	{ MODKEY,      XK_v,       spawn,          SHCMD("virt-manager") }, // Super+v Launch virt-manager
-	{ MODKEY,      XK_w,       spawn,          SHCMD("firefox -P me") }, // Super+w Launch Firefox with profile "me"
-	{ MODKEY|SHFT, XK_w,       spawn,          SHCMD("firefox -P rel") }, // Super+Shift+w Launch Firefox with profile "rel"
-	{ MODKEY|CTRL, XK_w,       spawn,          SHCMD("tor-browser") }, // Super+Ctrl+w Launch Tor Browser
-	{ MODKEY,      XK_x,       spawn,          SHCMD("keepassxc") }, // Super+x Launch keepassxc
-	{ MODKEY|CTRL, XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; ytopus") }, // Super+Ctrl+y Download copied YouTube video as OPUS to "$HOME/media/music/%(title)s.%(ext)s"
-	{ MODKEY|SHFT, XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; ytmp4") }, // Super+Shift+y Download copied YouTube video as MP4 to "$HOME/media/vids/%(title)s.%(ext)s"
-	{ MODKEY,      XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; ytstream") }, // Super+y Stream copied YouTube video to mpv
+	{ MODKEY|SHFT, XK_v,       spawn,          SHCMD("exec st -e nvim") }, // Super+Shift+v Launch nvim
+	{ MODKEY,      XK_v,       spawn,          SHCMD("exec virt-manager") }, // Super+v Launch virt-manager
+	{ MODKEY,      XK_w,       spawn,          SHCMD("exec firefox -P me") }, // Super+w Launch Firefox with profile "me"
+	{ MODKEY|SHFT, XK_w,       spawn,          SHCMD("exec firefox -P rel") }, // Super+Shift+w Launch Firefox with profile "rel"
+	{ MODKEY|CTRL, XK_w,       spawn,          SHCMD("exec tor-browser") }, // Super+Ctrl+w Launch Tor Browser
+	{ MODKEY,      XK_x,       spawn,          SHCMD("exec keepassxc") }, // Super+x Launch keepassxc
+	{ MODKEY|CTRL, XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; exec ytopus") }, // Super+Ctrl+y Download copied YouTube video as OPUS to "$HOME/media/music/%(title)s.%(ext)s"
+	{ MODKEY|SHFT, XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; exec ytmp4") }, // Super+Shift+y Download copied YouTube video as MP4 to "$HOME/media/vids/%(title)s.%(ext)s"
+	{ MODKEY,      XK_y,       spawn,          SHCMD(". ~/.local/profile.d/yt; exec ytstream") }, // Super+y Stream copied YouTube video to mpv
 	TAGKEYS(XK_1, 0) // Switch to tag 1
 	TAGKEYS(XK_2, 1) // Switch to tag 2
 	TAGKEYS(XK_3, 2) // Switch to tag 3
