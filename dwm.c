@@ -1539,8 +1539,7 @@ sendevent(Client *c, Atom proto)
 void
 setfocus(Client *c)
 {
-	if (!c->neverfocus)
-		XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
+	XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
 	XChangeProperty(dpy, root, netatom[NetActiveWindow], XA_WINDOW, 32,
 		PropModeReplace, (unsigned char *)&c->win, 1);
 	sendevent(c, wmatom[WMTakeFocus]);
