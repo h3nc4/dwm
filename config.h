@@ -8,12 +8,11 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Terminess Nerd Font:size=11" };
 static const char dmenufont[]       = "Terminess Nerd Font:size=11";
-static const char col_gray1[]       = "#2F4F4F";  /* Dark Slate Gray for background */
+static const char col_gray1[]       = "#000000";  /* Black for background */
 static const char col_gray2[]       = "#8B0000";  /* Dark Red for borders */
-static const char col_gray3[]       = "#D3D3D3";  /* Light Gray for normal text */
+static const char col_gray3[]       = "#FFFFFF";  /* White for normal text */
 static const char col_gray4[]       = "#FFFFFF";  /* White for active text */
 static const char col_active[]      = "#A40000";  /* Crimson Red for active */
-static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -22,8 +21,8 @@ static const char *colors[][3]      = {
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+    [SchemeNorm] = { OPAQUE, OPAQUE, borderalpha },
+	[SchemeSel]  = { OPAQUE, OPAQUE, borderalpha },
 };
 
 /* tagging */
